@@ -1,0 +1,18 @@
+# Default values for helm-k8s-example.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: nginx
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: NodePort
+  port: 80
+  # nodePort: 30780
+
+ingress:
+  enabled: false

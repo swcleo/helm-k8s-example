@@ -1,0 +1,36 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: www
+  labels:
+    app: www
+spec:
+  containers:
+  - name: www
+    image: web:0.0.1
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: www
+spec:
+  selector:
+    app: www
+  ports:
+  - port: 80
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: www
+  annotations:
+    ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: foo.bar.com
+    http:
+      paths:
+      - backend:
+          serviceName: www
+          servicePort: 80
+---
